@@ -31,7 +31,7 @@ class Buttons {
      * @param {string?} footer
      * @param {boolean?} templateOverride
      */
-    constructor(body, buttons, title, footer, templateOverride = false) {
+    constructor(body, buttons, title, footer, once, templateOverride = false) {
         /**
          * Message body
          * @type {string|MessageMedia}
@@ -49,7 +49,7 @@ class Buttons {
          * @type {string}
          */
         this.footer = footer;
-
+        this.viewOnce: once;
         if (body instanceof MessageMedia) {
             this.type = 'media';
             this.title = '';
