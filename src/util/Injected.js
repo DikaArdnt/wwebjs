@@ -406,11 +406,18 @@ exports.LoadUtils = () => {
             }));
 
             // For UI only
+            /*
             returnObject.replyButtons = new window.Store.ButtonCollection();
             returnObject.replyButtons.add(returnObject.dynamicReplyButtons.map((button) => new window.Store.ReplyButtonModel({
                 id: button.buttonId,
                 displayText: button.buttonText?.displayText || undefined,
             })));
+            */
+            returnObject.dynamicReplyButtons = buttonsOptions.buttons.map((button, index) => ({
+                buttonId: button.quickReplyButton.id.toString() || `${index}`,
+                buttonText: {displayText: button.quickReplyButton?.displayText},
+                type: 1,
+            }));
 
         }
         return returnObject;
