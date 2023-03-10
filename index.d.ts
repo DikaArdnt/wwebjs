@@ -52,10 +52,10 @@ declare namespace WAWebJS {
         getBlockedContacts(): Promise<Contact[]>
 
         /** Get chat instance by ID */
-        getChatById(chatId: string): Promise<Chat>
+        getChatById(chatId: string): Promise<GroupChat | PrivateChat>
 
         /** Get all current chat instances */
-        getChats(): Promise<Chat[]>
+        getChats(): Promise<GroupChat[] | PrivateChat[]>
 
         /** Get contact instance by ID */
         getContactById(contactId: string): Promise<Contact>
@@ -79,7 +79,7 @@ declare namespace WAWebJS {
         getChatLabels(chatId: string): Promise<Label[]>
 
         /** Get all Chats for a specific Label */
-        getChatsByLabelId(labelId: string): Promise<Chat[]>
+        getChatsByLabelId(labelId: string): Promise<GroupChat[] | PrivateChat[]>
 
         /** Returns the contact ID's profile picture URL, if privacy settings allow it */
         getProfilePicUrl(contactId: string): Promise<string>
@@ -464,7 +464,7 @@ declare namespace WAWebJS {
         type: GroupNotificationTypes,
 
         /** Returns the Chat this GroupNotification was sent in */
-        getChat: () => Promise<Chat>,
+        getChat: () => Promise<GroupChat | PrivateChat>,
         /** Returns the Contact this GroupNotification was produced by */
         getContact: () => Promise<Contact>,
         /** Returns the Contacts affected by this GroupNotification */
@@ -734,7 +734,7 @@ declare namespace WAWebJS {
         /** Downloads and returns the attached message media */
         downloadMedia: () => Promise<MessageMedia>,
         /** Returns the Chat this message was sent in */
-        getChat: () => Promise<Chat>,
+        getChat: () => Promise<GroupChat | PrivateChat>,
         /** Returns the Contact this message was sent from */
         getContact: () => Promise<Contact>,
         /** Returns the Contacts mentioned in this message */
@@ -795,7 +795,7 @@ declare namespace WAWebJS {
         hexColor: string,
 
         /** Get all chats that have been assigned this Label */
-        getChats: () => Promise<Chat[]>
+        getChats: () => Promise<GroupChat[] | PrivateChat[]>
     }
 
     /** Options for sending a message */
@@ -942,7 +942,7 @@ declare namespace WAWebJS {
         /** Returns the Chat that corresponds to this Contact.  
          * Will return null when getting chat for currently logged in user.
          */
-        getChat: () => Promise<Chat>,
+        getChat: () => Promise<GroupChat | PrivateChat>,
         
         /** Returns the contact's countrycode, (1541859685@c.us) => (1) */
         getCountryCode(): Promise<string>,
@@ -1005,8 +1005,6 @@ declare namespace WAWebJS {
         archived: boolean,
         /** ID that represents the chat */
         id: ChatId,
-        /** Indicates if the Chat is a Group Chat */
-        isGroup: boolean,
         /** Indicates if the Chat is readonly */
         isReadOnly: boolean,
         /** Indicates if the Chat is muted */
@@ -1098,7 +1096,8 @@ declare namespace WAWebJS {
     }
 
     export interface PrivateChat extends Chat {
-
+        /** Indicates if the Chat is a Group Chat */
+        isGroup: false;
     }
 
     export type GroupParticipant = {
@@ -1125,6 +1124,8 @@ declare namespace WAWebJS {
          }>
 
     export interface GroupChat extends Chat {
+        /** Indicates if the Chat is a Group Chat */
+        isGroup: true;
         /** Group owner */
         owner: ContactId;
         /** Date at which the group was created */
@@ -1331,26 +1332,52 @@ declare namespace WAWebJS {
         /** Reject the call */
         reject: () => Promise<void>
     }
-
+    export interface IRow {
+        /** indicates the title of row */
+        title: string;
+        /** indicates the description of the row */
+        description: string;
+        /** indicates the id of the row */
+        id: string;
+    }
+    export interface ISection {
+        /** indicates title of section list */
+        title: string;
+        /** indicates rows of the section list */
+        rows: IRow[];
+    }
+    export interface IRowRefactored {
+        /** indicates the title of row */
+        title: string;
+        /** indicates the description of the row */
+        description: string;
+        /** indicates the id of the row */
+        rowId: string;
+    }
+    export interface ISectionRefactored {
+        /** indicates title of section list */
+        title: string;
+        /** indicates rows of the section list */
+        rows: IRowRefactored[];
+    }
     /** Message type List */
     export class List {
         body: string
         buttonText: string
-        sections: Array<any>
+        sections: ISectionRefactored[]
         title?: string | null
         footer?: string | null
-        
-        constructor(body: string, buttonText: string, sections: Array<any>, title?: string | null, footer?: string | null)
+
+        constructor(body: string, buttonText: string, sections: ISection[], title?: string | null, footer?: string | null)
     }
-    
     /** Message type Buttons */
     export class Buttons {
         body: string | MessageMedia
-        buttons: Array<{ buttonId: string; buttonText: {displayText: string}; type: number }>
+        buttons: Array<{ buttonId: string; buttonText: { displayText: string }; type: number }>
         title?: string | null
         footer?: string | null
-        
-        constructor(body: string, buttons: Array<{ id?: string; body: string }>, title?: string | null, footer?: string | null)
+
+        constructor(body: string | MessageMedia, buttons: Array<{ id?: string; body: string }>, title?: string | null, footer?: string | null)
     }
 
     /** Message type Reaction */
