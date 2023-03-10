@@ -103,14 +103,12 @@ class Buttons {
                     }
                 };
             } else {
-                                    console.log("DYNAMIX ", button)
+                                    console.log("DYNAMIX ", button.id)
                 return {
                     index,
-                    dynamicReplyButtons: {
-                        buttonText: {
-                            displayText: button.body
-                        },
-                        buttonId: button.id || `${index}`
+                    quickReplyButtons: {
+                        displayText: button.body,
+                        id: button.id || `${index}`
                     }
                 };
             }
