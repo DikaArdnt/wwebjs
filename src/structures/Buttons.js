@@ -105,7 +105,7 @@ class Buttons {
             } else {
                 return {
                     index,
-                    quickReplyButton: {
+                    dynamicReplyButtons: {
                         displayText: button.body, 
                         id: button.id || `${index}`
                     }
