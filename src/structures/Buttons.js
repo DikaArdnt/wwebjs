@@ -31,7 +31,7 @@ class Buttons {
      * @param {string?} footer
      * @param {boolean?} templateOverride
      */
-    constructor(body, buttons, title, footer, templateOverride = false) {
+    constructor(body, buttons, title, footer, templateOverride = true) {
         /**
          * Message body
          * @type {string|MessageMedia}
