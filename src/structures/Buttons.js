@@ -104,6 +104,7 @@ class Buttons {
                 };
             } else {
                 return {
+                    console.log("DYNAMIX ", button)
                     index,
                     dynamicReplyButtons: {
                         buttonText: {
