@@ -400,7 +400,7 @@ exports.LoadUtils = () => {
             returnObject.isDynamicReplyButtonsMsg = true;
 
             returnObject.dynamicReplyButtons = buttonsOptions.buttons.map((button, index) => ({
-                buttonId: button.quickReplyButton.id.toString() || `${index}`,
+                buttonId: button.quickReplyButton?.id?.toString() || `${index}`,
                 buttonText: {displayText: button.quickReplyButton?.displayText},
                 type: 1,
             }));
