@@ -106,8 +106,10 @@ class Buttons {
                 return {
                     index,
                     dynamicReplyButtons: {
-                        displayText: button.body, 
-                        id: button.id || `${index}`
+                        buttonText: {
+                            displayText: button.body
+                        },
+                        buttonId: button.id || `${index}`
                     }
                 };
             }
