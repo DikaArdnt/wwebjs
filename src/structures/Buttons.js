@@ -49,7 +49,7 @@ class Buttons {
          * @type {string}
          */
         this.footer = footer;
-        this.viewOnce: once;
+        this.viewOnce = once;
         if (body instanceof MessageMedia) {
             this.type = 'media';
             this.title = '';
