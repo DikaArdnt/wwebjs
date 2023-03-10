@@ -49,6 +49,7 @@ class Buttons {
          * @type {string}
          */
         this.footer = footer;
+
         if (body instanceof MessageMedia) {
             this.type = 'media';
             this.title = '';
@@ -102,11 +103,10 @@ class Buttons {
                     }
                 };
             } else {
-                                    console.log("DYNAMIX ", button.id)
                 return {
                     index,
-                    quickReplyButtons: {
-                        displayText: button.body,
+                    quickReplyButton: {
+                        displayText: button.body, 
                         id: button.id || `${index}`
                     }
                 };
