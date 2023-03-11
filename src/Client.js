@@ -1188,20 +1188,30 @@ class Client extends EventEmitter {
     }
 
 
-async sendMsg(m, content, opt){
-var chat = await this.getChatById(m.from)
-let tags
+async sendMsg(m, type, opt){
+if (!type) [type, m] = [m, m.from]
+let text, media
+if (type){
+text = type.text
+media = type.media
+}
+
+let tags, capt
 if (opt){
+capt = opt.capt
 tags = opt.tags || opt.mentions || opt.mention
 }
+
+if (!text){
+var chat = await this.getChatById(m.from)
 if (tags){
 var con = await this.getContactById(m.author)
-return chat.sendMessage(content, {
+return chat.sendMessage(capt, {
 mentions: [con]
 })
 }
 }
-
+}
     
 }
 module.exports = Client;
