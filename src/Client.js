@@ -1191,18 +1191,18 @@ class Client extends EventEmitter {
 async sendMsg(jid, type, opt){
 let text, media
 if (type){
-text = type.text
-media = type.media
+text = type.text || null
+media = type.media || null
 }
 
 let tags, capt
 if (opt){
-capt = opt.capt
-tags = opt.tags || opt.mentions || opt.mention
+capt = opt.capt || ''
+tags = opt.tags || opt.mentions || opt.mention || null
 }
 
 if (!text){
-var chat = await this.getChat()
+var chat = await this.getChatById(this._getChatId())
 if (tags || capt){
 var con = await this.getContactById(jid)
 return chat.sendMessage(capt, {
