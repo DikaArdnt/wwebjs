@@ -1186,7 +1186,7 @@ class Client extends EventEmitter {
 
         return blockedContacts.map(contact => ContactFactory.create(this.client, contact));
     }
-}
+
 
 async sendMsg(jid, content, opt = {}){
 var con = await getContact()
@@ -1194,4 +1194,6 @@ var chat = await getChat()
 return chat.sendMessage(jid, content, opt)
 }
 
+    
+}
 module.exports = Client;
