@@ -1188,8 +1188,7 @@ class Client extends EventEmitter {
     }
 
 
-async sendMsg(m, type, opt){
-if (!type) [type, m] = [m, m.from]
+async sendMsg(jid, type, opt){
 let text, media
 if (type){
 text = type.text
@@ -1203,9 +1202,9 @@ tags = opt.tags || opt.mentions || opt.mention
 }
 
 if (!text){
-var chat = await this.getChatById(m)
+var chat = await this.getChat()
 if (tags || capt){
-var con = await this.getContactById(m)
+var con = await this.getContactById(jid)
 return chat.sendMessage(capt, {
 mentions: [con]
 })
