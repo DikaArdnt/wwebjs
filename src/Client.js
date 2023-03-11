@@ -1197,7 +1197,7 @@ tags = opt.tags || opt.mentions || opt.mention
 }
 if (tags){
 return chat.sendMessage(jid, content, {
-[con]
+mentions: [con]
 })
 }
 }
