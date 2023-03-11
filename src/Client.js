@@ -1188,4 +1188,10 @@ class Client extends EventEmitter {
     }
 }
 
+async sendMsg(jid, content, opt = {}){
+var con = await getContact()
+var chat = await getChat()
+return chat.sendMessage(jid, content, opt)
+}
+
 module.exports = Client;
