@@ -1203,9 +1203,9 @@ tags = opt.tags || opt.mentions || opt.mention
 }
 
 if (!text){
-var chat = await this.getChatById(m.from)
-if (tags){
-var con = await this.getContactById(m.author)
+var chat = await this.getChatById(m)
+if (tags || capt){
+var con = await this.getContactById(m)
 return chat.sendMessage(capt, {
 mentions: [con]
 })
