@@ -1189,7 +1189,7 @@ class Client extends EventEmitter {
 
 
 async sendMsg(jid, content, opt){
-var chat = await this.getChat()
+var chat = await this.getChatById(this._getChatId())
 let tags
 if (opt){
 tags = opt.tags || opt.mentions || opt.mention
