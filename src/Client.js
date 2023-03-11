@@ -754,6 +754,14 @@ class Client extends EventEmitter {
         return contacts.map(contact => ContactFactory.create(this, contact));
     }
 
+    async saveContact(number) {
+        let contact = await this.pupPage.evaluate(number => {
+            return window.WWebJS.getContact(number);
+        }, number);
+
+        let res = ContactFactory.create(this, contact);
+        return res.isMyContact
+    }
     /**
      * Get contact instance by ID
      * @param {string} contactId
