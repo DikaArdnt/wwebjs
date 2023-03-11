@@ -1195,7 +1195,7 @@ if (opt){
 tags = opt.tags || opt.mentions || opt.mention
 }
 if (tags){
-var con = await this.getContactById(opts.tags)
+var con = await this.getContactById(m.author)
 return chat.sendMessage(jid, content, {
 mentions: [con]
 })
