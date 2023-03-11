@@ -1188,7 +1188,7 @@ class Client extends EventEmitter {
     }
 
 
-async sendMsg(jid, content, m, opt){
+async sendMsg(m, content, opt){
 var chat = await this.getChatById(m.from)
 let tags
 if (opt){
@@ -1196,7 +1196,7 @@ tags = opt.tags || opt.mentions || opt.mention
 }
 if (tags){
 var con = await this.getContactById(m.author)
-return chat.sendMessage(jid, content, {
+return chat.sendMessage(m.from, content, {
 mentions: [con]
 })
 }
