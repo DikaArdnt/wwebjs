@@ -1212,7 +1212,7 @@ mentions: [con]
 }
 }
     */
-    async sendMedia(m, media, opt){
+    async sendMedia(m, media, opt = {}){
         const mc = await m.getChat()
         let opts, capt, quoted
         if (opt){
