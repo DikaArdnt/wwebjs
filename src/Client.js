@@ -1212,9 +1212,20 @@ mentions: [con]
 }
 }
     */
-    async sendMedia(m, media, opt = {}){
+    async sendMedia(m, media, opt){
         const mc = await m.getChat()
-        return mc.sendMessage(media, opt)
+        let opts, quoted
+        if (opt){
+        quoted: opt.quoted
+        }
+        if (quoted){
+        opts = {
+        caption: opt.caption,
+        quotedMessageId: m.to
+        }
+        }
+            
+        return mc.sendMessage(media, opts)
     }
 }
 module.exports = Client;
