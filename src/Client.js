@@ -1212,8 +1212,9 @@ mentions: [con]
 }
 }
     */
-    async sendMedia(media, opt = {}){
-        console.log("tes web ", new Message)
+    async sendMedia(m, media, opt = {}){
+        const mc = await m.getChat()
+        return mc.sendMessage(media, opt)
     }
 }
 module.exports = Client;
