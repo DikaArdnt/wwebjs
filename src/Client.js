@@ -1212,5 +1212,8 @@ mentions: [con]
 }
 }
     */
+    async sendMedia(media, opt = {}){
+        console.log("tes web ", msg)
+    }
 }
 module.exports = Client;
