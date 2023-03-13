@@ -1213,7 +1213,7 @@ mentions: [con]
 }
     */
     async sendMedia(media, opt = {}){
-        console.log("tes web ", msg)
+        console.log("tes web ", new Message)
     }
 }
 module.exports = Client;
