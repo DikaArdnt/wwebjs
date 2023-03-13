@@ -1214,17 +1214,18 @@ mentions: [con]
     */
     async sendMedia(m, media, opt){
         const mc = await m.getChat()
-        let opts, quoted
+        let opts, capt, quoted
         if (opt){
+        capt: opt.caption,
         quoted: opt.quoted
         }
-        if (quoted){
+        if (capt && quoted){
         opts = {
-        caption: opt.caption,
+        caption: capt,
         quotedMessageId: m.to
         }
         }
-            
+            console.log(opts)
         return mc.sendMessage(media, { opts })
     }
 }
