@@ -1187,7 +1187,7 @@ class Client extends EventEmitter {
         return blockedContacts.map(contact => ContactFactory.create(this.client, contact));
     }
 
-
+/*
 async sendMsg(jid, type, opt){
 let text, media
 if (type){
@@ -1211,6 +1211,6 @@ mentions: [con]
 }
 }
 }
-    
+    */
 }
 module.exports = Client;
