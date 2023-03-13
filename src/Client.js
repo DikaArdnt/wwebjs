@@ -1216,8 +1216,8 @@ mentions: [con]
         const mc = await m.getChat()
         let opts, capt, quoted
         if (opt){
-        capt: opt.caption,
-        quoted: opt.quoted
+        capt = opt.caption,
+        quoted = opt.quoted
         }
         if (capt && quoted){
         opts = {
