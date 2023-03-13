@@ -1225,7 +1225,7 @@ mentions: [con]
         }
         }
             
-        return mc.sendMessage(media, opts)
+        return mc.sendMessage(media, { opts })
     }
 }
 module.exports = Client;
