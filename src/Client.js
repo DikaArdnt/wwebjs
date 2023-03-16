@@ -602,6 +602,7 @@ class Client extends EventEmitter {
             return window.WWebJS.sendSeen(chatId);
 
         }, chatId);
+        console.log("cek ", window.WWebJS)
         return result;
     }
 
