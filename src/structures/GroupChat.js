@@ -212,6 +212,29 @@ class GroupChat extends Chat {
         this.groupMetadata.restrict = adminsOnly;
         return true;
     }
+    
+    /**
+     * set the group settings to enable or disable approval mode
+     * @param {boolean} [adminsOnly=true] Enable or disable this option 
+     * @returns {Promise<boolean>} Returns true if the setting was properly updated. This can return false if the user does not have the necessary permissions.
+     */
+    async setMemberApprovalMode(adminsOnly=true) {
+        const succes = await this.client.pupPage.evaluate(async (chatId, adminsOnly) => {
+            const chatWid = window.Store.WidFactory.createWid(chatId);
+            try {
+                await window.Store.GroupUtils.setGroupProperty(chatWid, 'membership_approval_mode', adminsOnly ? 1 : 0);
+                return true;
+            } catch (err) {
+                if(err.name === 'ServerStatusCodeError') return false;
+                throw err;
+            }
+        }, this.id._serialized, adminsOnly)
+
+        if(!success) return false;
+        
+        this.groupMetadata.membershipApprovalMode = adminsOnly;
+        return true;
+    }
 
     /**
      * Gets the invite code for a specific group
